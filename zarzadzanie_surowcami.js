@@ -12,7 +12,6 @@
         var res = [v.wood_float,v.stone_float,v.iron_float];
         var inc = [v.wood_prod,v.stone_prod,v.iron_prod];
         add = (a,b) => a+b;
-        hasEnough = (a,b) => a.every((v,i) => v >= b[i]);
         diff = (a,b) => a.map((v,i) => v - b[i]);
         sum = (a,b) => a.map((v,i) => v + b[i]);
         round = v => Math.round(v * 100) / 100;
@@ -20,7 +19,6 @@
         for(var i =0;i<2;i++){
             var cost = [];
             for (var k =1;k<4;k++) 	cost.push(Number(snob_cost[i][k]));
-            if (hasEnough(res,cost)) continue;
             var needs = [];
             for (var k =0;k<3;k++) needs.push(cost[k]-res[k]);
             var currTime = Math.max(...needs.map((v,i) => (v <= 0 ? 0 : v/inc[i])));
