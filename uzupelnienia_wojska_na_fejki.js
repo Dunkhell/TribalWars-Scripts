@@ -1,16 +1,5 @@
 function fillIn() {
-    let _settings = {
-        templates: [
-            { spy: 1, ram: 1 },
-            { spy: 1, catapult: 1 },
-            { ram: 1 },
-            { catapult: 1 }
-        ],
-        fillWith: 'spy,spear,sword,axe,light,heavy,ram,catapult',
-        fillExact: 'false',
-        safeguard: {}
-    };
-
+     
     $.ajax({
         url: 'https://media.innogamescdn.com/com_DS_PL/skrypty/HermitowskiePlikiMapy.js?_=' + ~~(Date.now() / 9e6),
         dataType: 'script',
@@ -58,7 +47,7 @@ function fillIn() {
         clearPlace();
         let place = getAvailableUnits();
     
-        for (let template of _settings.templates) {
+        for (let template of ustawienia.templates) {
             _validateTemplate(template, worldInfo);
             if (_isEnough(template, place, worldInfo)) {
                 if (_fill(template, place, worldInfo)) {
@@ -86,7 +75,7 @@ function fillIn() {
             if (template.hasOwnProperty(unit)) {
                 let count = Number(template[unit]);
                 if (!worldInfo.unit_info.hasOwnProperty(unit) || isNaN(count) || count < 0) {
-                    throw i18n.INVALID_SETTINGS_TEMPLATES
+                    throw i18n.INVALIDustawienia_TEMPLATES
                         .replace('__UNIT_NAME__', unit)
                         .replace('__VALUE__', template[unit]);
                 }
@@ -129,12 +118,12 @@ function fillIn() {
         let available = {};
         for (let unit of units) {
             available[unit] = Number(_getInput(unit).attr('data-all-count'));
-            if (_settings.safeguard.hasOwnProperty(unit)) {
-                let threshold = Number(_settings.safeguard[unit]);
+            if (ustawienia.safeguard.hasOwnProperty(unit)) {
+                let threshold = Number(ustawienia.safeguard[unit]);
                 if (isNaN(threshold) || threshold < 0) {
-                    throw i18n.INVALID_SETTINGS_SAFEGUARD
+                    throw i18n.INVALIDustawienia_SAFEGUARD
                         .replace('__UNIT_NAME__', unit)
-                        .replace('__VALUE__', _settings.safeguard[unit]);
+                        .replace('__VALUE__', ustawienia.safeguard[unit]);
                 }
                 available[unit] = Math.max(0, available[unit] - threshold);
             }
@@ -151,7 +140,7 @@ function fillIn() {
     }
 
     function _targetUniquePlayers(poll) {
-        if (!_settings.targetUniquePlayers) {
+        if (!ustawienia.targetUniquePlayers) {
             return poll;
         }
 
@@ -206,7 +195,7 @@ function fillIn() {
     function _fill(template, place, worldInfo) {
         let left = Math.floor(game_data.village.points * Number(worldInfo.config.game.fake_limit) * 0.01);
         left -= _countPopulations(template, worldInfo);
-        if ((left <= 0 || !_shouldApplyFakeLimit(template)) && !_toBoolean(_settings.fillExact)) {
+        if ((left <= 0 || !_shouldApplyFakeLimit(template)) && !_toBoolean(ustawienia.fillExact)) {
             return true;
         }
         let fillTable = _getFillTable();
@@ -215,7 +204,7 @@ function fillIn() {
             if (!worldInfo.unit_info.hasOwnProperty(name)) continue;
             let minimum = entry[1];
             let pop = Number(worldInfo.unit_info[name].pop);
-            if (!_toBoolean(_settings.fillExact)) {
+            if (!_toBoolean(ustawienia.fillExact)) {
                 if (name === 'spy' &&
                     game_data.units.filter(unit => unit !== 'spy').every(unit => Number(template[unit]) > 0)) {
                     let spies = (template['spy']) ? Number(template['spy']) : 0;
@@ -236,7 +225,7 @@ function fillIn() {
                 template[name] += minimum;
             }
             left -= minimum * pop;
-            if ((left <= 0 || !_shouldApplyFakeLimit(template)) && !_toBoolean(_settings.fillExact)) {
+            if ((left <= 0 || !_shouldApplyFakeLimit(template)) && !_toBoolean(ustawienia.fillExact)) {
                 break;
             }
         }
@@ -256,7 +245,7 @@ function fillIn() {
     }
 
     function _getFillTable() {
-        let entries = _settings.fillWith.split(',');
+        let entries = ustawienia.fillWith.split(',');
         let fillTable = [];
         for (const entry of entries) {
             let name = entry;
