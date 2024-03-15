@@ -24,12 +24,12 @@ if (typeof zabierzKomendyPozostalym === 'undefined') {
                 if (shareCheckbox && viewCheckbox) {
                     shareCheckbox.checked = true;
                     viewCheckbox.checked = true;
-                } else {
-                    if (zabierzKomendyPozostalym) {
-                        shareCheckbox.checked = false;
-                    }                
                 }
                 setTimeout(processRow, 100); 
+            }  else {
+                if (zabierzKomendyPozostalym) {
+                    shareCheckbox.checked = false;
+                }                
             }
             setTimeout(processRow, 10); 
         } else {
