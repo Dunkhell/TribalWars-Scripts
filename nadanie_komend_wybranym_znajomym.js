@@ -14,13 +14,9 @@ if (typeof zabierzKomendyPozostalym === 'undefined') {
                 setTimeout(processRow, 10);
             }
             const playerName = row.querySelector('td a').innerText.trim();
-            console.log(playerName);
-    
-            if (trusted.includes(playerName)) {
-            console.log("pressing for " + playerName); 
             const shareCheckbox = row.querySelector('td input[name="share[]"]');
-                const viewCheckbox = row.querySelector('td input[name="view[]"]');
-                
+            const viewCheckbox = row.querySelector('td input[name="view[]"]');
+            if (trusted.includes(playerName)) {
                 if (shareCheckbox && viewCheckbox) {
                     shareCheckbox.checked = true;
                     viewCheckbox.checked = true;
