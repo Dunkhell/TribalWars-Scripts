@@ -58,16 +58,7 @@ function fillIn() {
     }
     
     function clearPlace() {
-        $('[id^=unit_input_]').val('');
-        let defaultTargetInput = $('.target-input-field');
-    
-        if (defaultTargetInput.length === 1) {
-            defaultTargetInput.val('');
-        }
-        else { // mobile devices
-            $('#inputy').val('');
-            $('#inputx').val('');
-        }
+        $('[id^=unit_input_]').val('');  
     }
     
     function _validateTemplate(template, worldInfo) {
