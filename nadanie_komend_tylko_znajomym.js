@@ -1,12 +1,15 @@
+var trusted = config.trusted;
+var zabierzKomendyPozostalym = config.zabierzKomendyPozostalym;
+
 if (typeof zabierzKomendyPozostalym === 'undefined') {
-    alert('Skrypt został zaktualizowany, używasz starej wersji. Sprawdź najnowszą na forum plemiona w skryptotece!')
+    alert('Skrypt zostal zaktualizowany, uzywasz starej wersji. sprawdz najnowsza na forum plemiona w skryptotece!')
     
 } else {
     const tableRows = document.querySelectorAll('form table.vis tbody tr');
+	console.table(tableRows);
     let index = 0;
     function processRow() {
         const row = tableRows[index];
-        console.log(row);
         
         if (row) {
             index++;
@@ -40,4 +43,3 @@ if (typeof zabierzKomendyPozostalym === 'undefined') {
         }
     }
 }
-
