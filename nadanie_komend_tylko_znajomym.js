@@ -2,15 +2,11 @@
 var trusted = config.trusted.map(item => item.trim().toLowerCase());
 var zabierzKomendyPozostalym = config.zabierzKomendyPozostalym;
 
-console.log(Array.isArray(trusted));
-console.log(typeof zabierzKomendyPozostalym);
-
 if (typeof zabierzKomendyPozostalym === 'undefined') {
     alert('Skrypt zostal zaktualizowany, uzywasz starej wersji. sprawdz najnowsza na forum plemiona w skryptotece!')
     
 } else {
     const tableRows = document.querySelectorAll('form table.vis tbody tr');
-	console.table(tableRows);
     let index = 0;
     function processRow() {
         const row = tableRows[index];
@@ -24,7 +20,6 @@ if (typeof zabierzKomendyPozostalym === 'undefined') {
             const shareCheckbox = row.querySelector('td input[name="share[]"]');
             const viewCheckbox = row.querySelector('td input[name="view[]"]');
             if (trusted.includes(playerName)) {
-				console.log(playerName);
                 if (shareCheckbox && viewCheckbox) {
                     shareCheckbox.checked = true;
                     viewCheckbox.checked = true;
