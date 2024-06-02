@@ -34,6 +34,11 @@ async function TabelaBurzena() {
         saveBurzenieData();
     }
 
+    function resetScript() {
+        localStorage.removeItem(POINTS_BEFORE_KEY)
+        Dialog.close();
+    }
+
     if (localStorage.getItem(POINTS_BEFORE_KEY) == null) {
         console.log('Zaciągamy dane przed burzeniem');
         window.alert("Pierwsze odpalenie skryptu, zapisuje punkty przed burzeniem");
@@ -93,10 +98,9 @@ async function TabelaBurzena() {
         console.log(tabela_burzenia_bbcode);
 
         var startDialog = Dialog.show(
-            'Script', '<div id="dudialog" style="width: 600px; height: 300px;">Tabelka burzenia BB-Code<br><textarea id="ScriptAlly" style="width: 100%; height: 80%; margin: 0px auto; border: 1px solid rgb(129, 66, 2);" readonly required>' + tabela_burzenia_bbcode + '</textarea></div>'
+            'Script', '<div id="dudialog" style="width: 600px; height: 300px;">Tabelka burzenia BB-Code<br><textarea id="ScriptAlly" style="width: 100%; height: 80%; margin: 0px auto; border: 1px solid rgb(129, 66, 2);" readonly required>' + tabela_burzenia_bbcode + '</textarea><br>Tabela burzenia moze pokazywac niepoprawne wartosci "po burzeniu", w takim przypadku zamknij okno skryptu i uzyj go ponownie pozniej. Jezeli tabelka burzenia wyglada poprawnie wcisnij ponizszy przycisk<br><button type="button" id="resetButton" style="border-radius: 5px; border: 1px solid #000; color: #fff; background: linear-gradient(to bottom, #947a62 0%,#7b5c3d 22%,#6c4824 30%,#6c4824 100%)">Zresetuj</button></div>'
         );
-
-        localStorage.removeItem(POINTS_BEFORE_KEY)
+        document.getElementById('resetButton').addEventListener('click', resetScript);
     }
 
 
