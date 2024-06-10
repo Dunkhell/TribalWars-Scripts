@@ -1,17 +1,8 @@
-function stringToBoolean(str) {
-  switch (str.toLowerCase()) {
-    case "true":
-      return true;
-    case "false":
-      return false;
-    default:
-      return null; 
-  }
-}
+
 
 
 if (typeof config !== 'undefined') {
-    var zabierzKomendyPozostalym = stringToBoolean(config.zabierzKomendyPozostalym);
+    var zabierzKomendyPozostalym = config.zabierzKomendyPozostalym;
     var trusted = config.trusted.map(item => item.trim().toLowerCase());;
 } else {
     var zabierzKomendyPozostalym = typeof zabierzKomendyPozostalym !== 'undefined' ? zabierzKomendyPozostalym : true;
