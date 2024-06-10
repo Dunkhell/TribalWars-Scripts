@@ -1,6 +1,3 @@
-
-
-
 if (typeof config !== 'undefined') {
     var zabierzKomendyPozostalym = config.zabierzKomendyPozostalym;
     var trusted = config.trusted.map(item => item.trim().toLowerCase());;
@@ -9,7 +6,8 @@ if (typeof config !== 'undefined') {
     var trusted = typeof trusted !== 'undefined' ? trusted.map(item => item.trim().toLowerCase()) : [];
 }
 
-const tableRows = document.querySelectorAll('form table.vis tbody tr');
+const tableRows = document.querySelectorAll('form table.vis tr');
+
 let index = 0;
 function processRow() {
     const row = tableRows[index];
@@ -40,9 +38,17 @@ function processRow() {
 }
 processRow();
 function clickSaveButton() {
-    const saveButton = document.querySelector('input[type="submit"].btn');
-    if (saveButton) {
-        saveButton.click();
-    }
-}
+    const buttons = document.querySelectorAll('input.btn');
 
+    var button;
+    if (buttons.length >= 2) {
+        button = buttons[1];
+    } else if (buttons.length == 1) {
+        button = buttons[0];
+    } else {
+        // error
+        console.log(' no button found to save ');
+    }
+
+    button.click();
+}
