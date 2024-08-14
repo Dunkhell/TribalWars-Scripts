@@ -120,9 +120,6 @@
                         if (e + i - 1 >= s.length) return;
                         t.push(s.slice(e, e + i));
                     }
-
-                    console.table(t);
-
                 }),
                 t.sort((a, b) => {
                     const dateA = a[0].match(/dnia (\d{2}\/\d{2}\/\d{4})/)[1];
